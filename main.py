@@ -10,7 +10,11 @@ dotenv.load_dotenv()
 
 EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("PASSWORD")
-GeneralSleepTime = 5 # General sleep time to wait for elements to load - change if needed depending on your internet speed
+if not EMAIL or not PASSWORD:
+    raise EnvironmentError(
+        "EMAIL and PASSWORD environment variables must be set for the login script"
+    )
+GeneralSleepTime = 5  # General sleep time to wait for elements to load - change if needed depending on your internet speed
 
 driver = webdriver.Firefox()
 driver.get("https://lightroom.adobe.com/signin")
